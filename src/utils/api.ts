@@ -3,6 +3,7 @@ import type { Banner } from '@/models/banners'
 import type { Personalized ,PersonalizedNewSong } from '@/models/personalized'
 import type {SongUrl} from '@/models/song_url'
 import type {Song} from '@/models/song'
+import type {PlayListDetail} from '@/models/playlist'
 
 export async function name(phone:string,password:string) {
     return await http.get<{
@@ -23,6 +24,18 @@ export async function banner(){
 export async function usePersonalized(){
     const {result} = await http.get<{ result: Personalized[] }>('/personalized')
     return result
+}
+
+//获取歌单详情
+export async function usePlayListDetail(id:number){
+    const {playlist} = await http.get<{playlist:PlayListDetail}>('/playlist/detail',{id:id})
+    return playlist
+}
+
+//返回歌单里面的歌曲
+export async function usePlayListTrackAll(id: number) {
+    const {songs} = await http.get<{ songs: Song[] }>('/playlist/track/all', {id: id})
+    return songs
 }
 
 //

@@ -88,7 +88,7 @@ export const playerStore = defineStore('player',{
             }, 500)
         },
         async play(id: number) {
-            if (id == this.id) return;
+            // if (id == this.id) return;
             this.isPlaying = false
             const data = await useSongUrl(id)
             this.audio.src = data.url;
@@ -206,7 +206,6 @@ export const playerStore = defineStore('player',{
         interval() {
             if (this.isPlaying && !this.sliderInput) {
                 this.currentTime = parseInt(this.audio.currentTime.toString());
-                console.log("aaaaaa",this.audio.duration);
                 
                 this.duration = parseInt(this.audio.duration.toString());
                 this.ended = this.audio.ended

@@ -3,13 +3,13 @@
   <div class="header">
 
 <div class="logo">
-    <img src="./images/logo.png" alt="">
+    <img src="@/assets/images/logo.png" alt="">
     <span>佳佳音乐</span>
 </div>
 
 <div class="middle">
-    <i class="iconfont icon-jiantou-xiangzuo"></i>
-    <i class="iconfont icon-jiantou-xiangyou"></i>
+    <i class="iconfont icon-jiantou-xiangzuo" @click="router.go(-1)"></i>
+    <i class="iconfont icon-jiantou-xiangyou" @click="router.go(+1)"></i>
     <div class="search">
         <i class="iconfont icon-sousuo"></i>
         <input type="text" placeholder="搜索">
@@ -19,8 +19,8 @@
 
 <div class="other">
     <div class="userInfo">
-        <img src="./images/ningzi.jpg" alt="">
-        <span>刘佳</span>
+        <img src="@/assets/images/header.jpg" alt="">
+        <span>某某</span>
     </div>
 
     <ul>
@@ -42,6 +42,8 @@
 </template>
 <script setup lang='ts'>
 import {ref,reactive,toRefs} from 'vue'
+import {useRouter} from 'vue-router'
+const router = useRouter()
 
 //改变主题
 // const mode = ref(false)

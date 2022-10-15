@@ -2,8 +2,9 @@
    <div class="main">
     <leftBox/>
     <el-scrollbar>
-        <rightBox/>
+        <router-view></router-view>
     </el-scrollbar>
+    <footerPlayList/>
    </div>
 </template>
 <script setup lang='ts'>
@@ -16,5 +17,7 @@ import rightBox from './components/right_box.vue'
     width: 100%;
     height: 560px;
     display: flex;
-    background-color: #434343;}
+    background-color: #434343;
+    position: relative;
+    }
 </style>

@@ -7,15 +7,22 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    ElAvatar: typeof import('element-plus/es')['ElAvatar']
+    ElButton: typeof import('element-plus/es')['ElButton']
     ElCarousel: typeof import('element-plus/es')['ElCarousel']
     ElCarouselItem: typeof import('element-plus/es')['ElCarouselItem']
     ElCol: typeof import('element-plus/es')['ElCol']
+    ElDrawer: typeof import('element-plus/es')['ElDrawer']
+    ElPopover: typeof import('element-plus/es')['ElPopover']
     ElRow: typeof import('element-plus/es')['ElRow']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     ElSlider: typeof import('element-plus/es')['ElSlider']
+    ElTable: typeof import('element-plus/es')['ElTable']
+    ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
     Footer: typeof import('./src/components/layout/footer/footer.vue')['default']
+    FooterPlayList: typeof import('./src/components/layout/footer/footerPlayList.vue')['default']
     Header: typeof import('./src/components/layout/header/header.vue')['default']
     IconPark: typeof import('./src/components/common/IconPark.vue')['default']
     Left_box: typeof import('./src/components/layout/main/components/left_box.vue')['default']

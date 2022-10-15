@@ -2,7 +2,6 @@
 import { RouterLink, RouterView } from 'vue-router'
 import {userPlayerInit} from '@/stores/player'
 import {toRefs} from 'vue'
-
 userPlayerInit()
 
 </script>
@@ -10,10 +9,11 @@ userPlayerInit()
 <template>
   
 
-  <RouterView />
+  <RouterView/>
 </template>
 
 <style lang="less">
+
 /*公共样式*/
 * {
     margin: 0;

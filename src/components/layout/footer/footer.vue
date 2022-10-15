@@ -2,9 +2,7 @@
     <!-- 底部 -->
     <div class="footer">
         <div class="ft_left">
-            <img class="_img"
-                :src="song.al?.picUrl || 'https://p2.music.126.net/Airtcyaq3U9RaeEy-f_JPw==/109951167961950932.jpg'"
-                alt="">
+            <img class="_img" :src="song.al?.picUrl || 'src/assets/images/OpticalDisk.png'" alt="">
             <div class="songNameAndSinger">
                 <span class="songName">{{song.name || '来源云音乐'}}<i class="iconfont icon-aixin"></i></span>
                 <span class="singer">{{song.ar?.first().name || '你来唱'}}</span>
@@ -14,15 +12,18 @@
         <div class="ft_main">
             <!-- 播放栏工具 -->
             <ul class="tool_list">
-                <li><i class="iconfont icon-lajitong"></i></li>
-                <li><i class="iconfont icon-shangyishoushangyige"></i></li>
+                <li class="hover-li">
+                    <IconPark :icon="loopType===0?PlayOnce:loopType===1?LoopOnce:ShuffleOne" size="20" :stroke-width="3"
+                        class="hover-text" @click="toggleLoop" fill="#ffffff" />
+                </li>
+                <li @click="prev"><i class="iconfont icon-shangyishoushangyige"></i></li>
                 <li @click="togglePlay()">
                     <i v-if="!isPlaying" class="iconfont icon-bofang _audio"></i>
                     <i v-else class="iconfont icon-weibiaoti--"></i>
                     <!-- <audio id="ado">
                     </audio> -->
                 </li>
-                <li><i class="iconfont icon-xiayigexiayishou"></i></li>
+                <li @click="next"><i class="iconfont icon-xiayigexiayishou"></i></li>
                 <li><i class="iconfont icon-geciweidianji"></i></li>
             </ul>
             <!-- 进度条 -->
@@ -45,9 +46,20 @@
         <ul class="ft_right">
             <li class="jigao">极高</li>
             <li class="iconfont icon-yinxiao"></li>
-            <li class="iconfont icon-yinliangkai _voice"></li>
+            <div class="popover">
+                <el-popover placement="top" width="50px" popper-class="myPopoer">
+                    <template #reference>
+                        <li class="iconfont icon-yinliangkai _voice" @mouseenter="volumeIsShow"
+                            @mouseleave="volumeIsShow">
+                        </li>
+                    </template>
+
+                    <el-slider :max="100" :min="0" @input="setVolume" v-model="volume" vertical height="200px" />
+                </el-popover>
+            </div>
             <li class="iconfont icon-yiqipindan"></li>
-            <li class="iconfont icon-24gl-playlistMusic"></li>
+            <li class="iconfont icon-24gl-playlistMusic" @click="showPlayList = !showPlayList">
+            </li>
         </ul>
     </div>
 </template>
@@ -55,9 +67,22 @@
 import { ref, reactive, toRefs } from 'vue'
 import { playerStore } from '@/stores/player'
 import { useFormatDuring } from '@/utils/number';
+import { Play, PauseOne, LoopOnce, ShuffleOne, PlayOnce, GoEnd, GoStart, VolumeSmall } from "@icon-park/vue-next";
+import footerPlayList from './footerPlayList.vue'
 
-const { song, songUrl, isPlaying, isPause, duration, currentTime, onSliderInput, onSliderChange, togglePlay } = toRefs(playerStore());
+const drawer = ref(false)
 
+const { toggleLoop, loopType, volume, showPlayList, muted, song, 
+    songUrl, setVolume, isPlaying, isPause, duration,
+     currentTime, onSliderInput, onSliderChange, togglePlay,
+        next,prev
+    } = toRefs(playerStore());
+
+const volumeShow = ref(false)
+
+const volumeIsShow = () => {
+    volumeShow.value = !volumeShow.value
+}
 
 </script>
 <style lang='less' scoped>
@@ -125,6 +150,7 @@ const { song, songUrl, isPlaying, isPause, duration, currentTime, onSliderInput,
             li:nth-child(3) i {
                 font-size: 30px;
             }
+
         }
 
         .progress {
@@ -172,18 +198,19 @@ const { song, songUrl, isPlaying, isPause, duration, currentTime, onSliderInput,
         }
     }
 
-    .time{
-            width: 30px;
-            height: 100%;
-            position: relative;
-            span{
-                position: absolute;
-                color: #fff;
-                font-size: 12px;
-                left: 10px;
-                bottom: 8px;
-            }
+    .time {
+        width: 30px;
+        height: 100%;
+        position: relative;
+
+        span {
+            position: absolute;
+            color: #fff;
+            font-size: 12px;
+            left: 10px;
+            bottom: 8px;
         }
+    }
 
     .ft_right {
         width: 180px;
@@ -194,6 +221,14 @@ const { song, songUrl, isPlaying, isPause, duration, currentTime, onSliderInput,
         justify-content: space-around;
         align-items: center;
         position: relative;
+
+        .popover {
+            :deep(el-popper-container-8207) {
+                .myPopoer {
+                    min-width: auto !important;
+                }
+            }
+        }
 
         .jigao {
             font-size: 14px;
@@ -209,9 +244,11 @@ const { song, songUrl, isPlaying, isPause, duration, currentTime, onSliderInput,
             color: #d4d4d4;
             font-size: 20px;
         }
-    }
 
+    }
 }
+
+
 
 :deep(.el-slider__button) {
     width: 8px;
@@ -223,3 +260,8 @@ const { song, songUrl, isPlaying, isPause, duration, currentTime, onSliderInput,
     height: 10px;
 }
 </style>
+<style>
+
+</style>
+
+

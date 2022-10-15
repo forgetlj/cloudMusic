@@ -18,6 +18,12 @@ export default defineConfig({
     Components({
       resolvers: [ElementPlusResolver()],
     }),
+    "import",
+            {
+                libraryName: '@icon-park/vue',
+                libraryDirectory: 'es/icons',
+                camel2DashComponentName: false // default: true,
+            }
   ],
   resolve: {
     alias: {

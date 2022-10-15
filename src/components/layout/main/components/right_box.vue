@@ -56,6 +56,8 @@ import { commonStore } from '@/stores/common'
 import PlayList from './playList.vue'
 import plsyListNewSong from './plsyListNewSong.vue'
 
+
+
 const { banners } = toRefs(commonStore())
 const { getBanners } = commonStore()
 onMounted(async () => {

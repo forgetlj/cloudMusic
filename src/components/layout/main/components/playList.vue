@@ -13,7 +13,7 @@
         </ul> -->
         <el-row :gutter="20">
             <el-col :span="6" v-for="(item,index) in personalized.sampleSize(8)" :key="index">
-                <div class="col-container">
+                <div class="col-container" @click="router.push({name:'playListSong',query:{id:item.id}})">
                     <div class="cover hvr-bob">
                         <img :src="item.picUrl" alt="" class="imgStyle">
                     </div>
@@ -28,6 +28,10 @@
 import { ref, reactive, toRefs, onMounted } from 'vue'
 import { musicStore } from '@/stores/musicStore'
 import { useNumberFormat } from '@/utils/number'
+import {useRouter} from 'vue-router'
+
+const router = useRouter()
+
 const { personalized } = toRefs(musicStore())
 const { getPersonalized } = musicStore()
 onMounted(async () => {
