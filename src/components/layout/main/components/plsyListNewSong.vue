@@ -29,7 +29,6 @@ onMounted(async()=>{
     await getPersonalizedNewSong()
 })
 
-console.log(personalizedNewSong)
 </script>
 <style lang='less' scoped>
 img{

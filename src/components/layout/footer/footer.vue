@@ -2,7 +2,7 @@
     <!-- 底部 -->
     <div class="footer">
         <div class="ft_left">
-            <img class="_img" :src="song.al?.picUrl || 'src/assets/images/OpticalDisk.png'" alt="">
+            <img @click="song.id?router.push({name:'lyrics',query:{id:song.id}}):''" class="_img" :src="song.al?.picUrl || '../src/assets/images/OpticalDisk.png'" alt="">
             <div class="songNameAndSinger">
                 <span class="songName">{{song.name || '来源云音乐'}}<i class="iconfont icon-aixin"></i></span>
                 <span class="singer">{{song.ar?.first().name || '你来唱'}}</span>
@@ -24,7 +24,7 @@
                     </audio> -->
                 </li>
                 <li @click="next"><i class="iconfont icon-xiayigexiayishou"></i></li>
-                <li><i class="iconfont icon-geciweidianji"></i></li>
+                <li @click="song.id?router.push({name:'lyrics',query:{id:song.id}}):''"><i class="iconfont icon-geciweidianji"></i></li>
             </ul>
             <!-- 进度条 -->
             <!-- <div class="progress">
@@ -69,6 +69,9 @@ import { playerStore } from '@/stores/player'
 import { useFormatDuring } from '@/utils/number';
 import { Play, PauseOne, LoopOnce, ShuffleOne, PlayOnce, GoEnd, GoStart, VolumeSmall } from "@icon-park/vue-next";
 import footerPlayList from './footerPlayList.vue'
+import {useRouter} from 'vue-router'
+
+const router = useRouter()
 
 const drawer = ref(false)
 

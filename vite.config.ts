@@ -1,16 +1,18 @@
-import { fileURLToPath, URL } from 'node:url'
+import { fileURLToPath, URL } from "node:url";
 
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import vueJsx from '@vitejs/plugin-vue-jsx'
-import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+import vueJsx from "@vitejs/plugin-vue-jsx";
+import AutoImport from "unplugin-auto-import/vite";
+import Components from "unplugin-vue-components/vite";
+import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
+
+import inject from "@rollup/plugin-inject";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vue(), 
+    vue(),
     vueJsx(),
     AutoImport({
       resolvers: [ElementPlusResolver()],
@@ -19,15 +21,18 @@ export default defineConfig({
       resolvers: [ElementPlusResolver()],
     }),
     "import",
-            {
-                libraryName: '@icon-park/vue',
-                libraryDirectory: 'es/icons',
-                camel2DashComponentName: false // default: true,
-            }
+    {
+      libraryName: "@icon-park/vue",
+      libraryDirectory: "es/icons",
+      camel2DashComponentName: false, // default: true,
+    },
+    inject({
+      $: "jquery",
+    }),
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    }
-  }
-})
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
+    },
+  },
+});

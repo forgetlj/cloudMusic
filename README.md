@@ -21,6 +21,20 @@ If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has a
 
 See [Vite Configuration Reference](https://vitejs.dev/config/).
 
+下载网易云接口[NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi)
+
+## 接口
+下载依赖
+
+```sh
+npm install
+```
+运行
+```sh
+node app.js 
+```
+
+
 ## Project Setup
 
 ```sh

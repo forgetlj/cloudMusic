@@ -4,7 +4,7 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 
-
+import $ from 'jquery'
 
 import '@/assets/font_header.less'
 import '@/assets/font_leftBox.less'
@@ -20,5 +20,6 @@ const app = createApp(App)
 
 app.use(createPinia())
 app.use(router)
+app.use($)
 
 app.mount('#app')

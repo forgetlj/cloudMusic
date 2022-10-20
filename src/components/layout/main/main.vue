@@ -2,7 +2,8 @@
    <div class="main">
     <leftBox/>
     <el-scrollbar>
-        <router-view></router-view>
+        <!-- <rightBox/> -->
+        <RouterView/>
     </el-scrollbar>
     <footerPlayList/>
    </div>

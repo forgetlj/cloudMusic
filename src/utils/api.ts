@@ -4,6 +4,7 @@ import type { Personalized ,PersonalizedNewSong } from '@/models/personalized'
 import type {SongUrl} from '@/models/song_url'
 import type {Song} from '@/models/song'
 import type {PlayListDetail} from '@/models/playlist'
+import type {lrc} from '@/models/lyric'
 
 export async function name(phone:string,password:string) {
     return await http.get<{
@@ -44,6 +45,7 @@ export async function useSongUrl(id:number) {
     return data.first()
 }
 
+//歌曲详情
 export async function useDetail(id: number) {
     const {songs} = await http.get<{ songs: Song[] }>('/song/detail', {ids: id})
     return songs.first()
@@ -53,3 +55,11 @@ export async function usePersonalizedNewSong() {
     const {result} = await http.get<{ result: PersonalizedNewSong[] }>('/personalized/newsong')
     return result
 }
+
+//获取当前歌词
+
+export async function useLyric(id:number){
+    const {lrc} = await http.get<{lrc:lrc}>('/lyric',{id:id})
+    return lrc
+}
+
